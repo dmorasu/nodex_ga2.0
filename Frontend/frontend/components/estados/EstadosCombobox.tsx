@@ -71,6 +71,7 @@ export default function EstadosLista({
 
   // =====================================================
   // CARGAR ESTADOS
+  // SOLO ESTADO ID 4
   // =====================================================
 
   useEffect(() => {
@@ -80,19 +81,30 @@ export default function EstadosLista({
       try {
 
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/estados`
+          `${process.env.NEXT_PUBLIC_API_URL}/estados/4`
         )
 
-        const data =
-          await response.json()
+        const data = await response.json()
 
-        setEstados(data)
+        // ================================================
+        // FILTRAR ÚNICAMENTE EL ESTADO ID 4
+        // ================================================
 
+        const estadoId4 = data.filter(
+          (estado: Estado) => estado.id === 4
+        )
+
+        setEstados(estadoId4)
+
+
+        // ================================================
+        // SELECCIONAR VALOR POR DEFECTO
+        // ================================================
 
         if (defaultValue) {
 
           const found =
-            data.find(
+            estadoId4.find(
               (estado: Estado) =>
                 estado.id === defaultValue
             )
@@ -372,7 +384,6 @@ export default function EstadosLista({
       )}
 
 
-
       {/* ================================================= */}
       {/* INPUT OCULTO                                      */}
       {/* ================================================= */}
@@ -384,7 +395,6 @@ export default function EstadosLista({
           selectedEstado?.id ?? ""
         }
       />
-
 
 
       {/* ================================================= */}
@@ -410,7 +420,6 @@ export default function EstadosLista({
             backdrop-blur-[1px]
           "
         />
-
 
 
         {/* =============================================== */}
@@ -515,7 +524,6 @@ export default function EstadosLista({
               </div>
 
 
-
               {/* ========================================= */}
               {/* CERRAR                                     */}
               {/* ========================================= */}
@@ -546,7 +554,6 @@ export default function EstadosLista({
               </button>
 
             </div>
-
 
 
             {/* =========================================== */}
@@ -590,7 +597,6 @@ export default function EstadosLista({
                       onClick={() =>
                         handleSelect(estado)
                       }
-
                       className={`
                         group
                         flex
@@ -639,6 +645,7 @@ export default function EstadosLista({
                             border
                             shrink-0
                             transition
+
                             ${
                               seleccionado
                                 ? `${visual.bgColor} ${visual.borderColor}`
@@ -668,7 +675,6 @@ export default function EstadosLista({
                       </div>
 
 
-
                       {/* ================================= */}
                       {/* CHECK                              */}
                       {/* ================================= */}
@@ -690,10 +696,10 @@ export default function EstadosLista({
 
                 })}
 
+
               </div>
 
             </div>
-
 
 
             {/* =========================================== */}

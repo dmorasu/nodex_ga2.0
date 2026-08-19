@@ -238,6 +238,12 @@ export default async function DetalleSolicitudTramite({
             xl:grid-cols-4
             gap-2
           ">
+            {/* =========================================== */}
+            {/* ESTADO                                      */}
+            {/* =========================================== */}
+
+            <AddEstadosBoton />
+
 
 
             

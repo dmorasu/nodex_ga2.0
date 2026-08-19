@@ -1400,7 +1400,7 @@ export default function DashboardPageClient() {
 
                             {
                               solicitud
-                                .tramite
+                                .municipios
                                 ?.responsable ??
                               "Sin analista asignado"
                             }
